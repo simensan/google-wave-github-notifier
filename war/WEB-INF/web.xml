@@ -30,4 +30,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
       <servlet-name>Profile</servlet-name>
       <url-pattern>/_wave/robot/profile</url-pattern>
    </servlet-mapping>
+   
+  
+  <filter>
+    <filter-name>guiceFilter</filter-name>
+    <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>guiceFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>com.fauxpas.ServletContextListener</listener-class>
+  </listener>
 </web-app>

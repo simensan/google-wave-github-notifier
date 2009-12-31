@@ -1,0 +1,7 @@
+.cache
+.project
+.settings
+.buildpath
+.classpath
+war/WEB-INF/classes
+war/WEB-INF/lib

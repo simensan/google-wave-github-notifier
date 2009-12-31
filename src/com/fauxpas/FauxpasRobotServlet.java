@@ -1,15 +1,10 @@
 package com.fauxpas;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
-import java.security.MessageDigestSpi;
 
-import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-import javax.servlet.http.*;
 
 import com.google.appengine.api.datastore.DatastoreTimeoutException;
 import com.google.wave.api.*;
@@ -18,17 +13,16 @@ import com.fauxpas.Model.*;
 
 @SuppressWarnings("serial")
 public class FauxpasRobotServlet extends AbstractRobotServlet {	
-	private static final Logger log = Logger.getLogger(CommitServlet.class.getName());
+	private static final Logger log = Logger.getLogger(FauxpasCommitServlet.class.getName());
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void processEvents(RobotMessageBundle bundle) {
 		Wavelet wavelet = bundle.getWavelet();
-        PersistenceManager pm = PMFSingleton.getInstance().getPersistenceManager();
+        PersistenceManager pm = PMF.getInstance().getPersistenceManager();
         
 		if(bundle.getEvents().size() == 0) {
-			pushMessages(bundle);
-		}
+			pushMessages(bundle); //Cron tick
+		} 
 		else if (bundle.wasSelfAdded()) {
 			log.warning("Added to wavelet");
 			
@@ -57,7 +51,7 @@ public class FauxpasRobotServlet extends AbstractRobotServlet {
 	@SuppressWarnings("unchecked")
 	private void pushMessages(RobotMessageBundle bundle) {
 		try {
-			PersistenceManager pm =  PMFSingleton.getInstance().getPersistenceManager();
+			PersistenceManager pm =  PMF.getInstance().getPersistenceManager();
 		    List<Commit> commits = (List<Commit>) pm.newQuery(Commit.class)
 		          .execute();
 		    for (Commit commit : commits) {
@@ -71,13 +65,13 @@ public class FauxpasRobotServlet extends AbstractRobotServlet {
 		    	
 		     	Wavelet wavelet = bundle.getWavelet(commit.getWaveId(), commit.getWaveletId());
 		    	log.warning("Wavelet info: " + wavelet.getTitle() + wavelet.getWaveId());
+		    	
 	    		if (wavelet != null) {
-	    			log.warning("Wavelet is not null: ");
-	    			log.warning("Wavelet is not null: " + wavelet.getWaveId());
 	    			Blip blip = wavelet.appendBlip();
 	    			TextView view = blip.getDocument();
 	    			view.append("Commit: " + commit.getMsg());
 	    		}
+	    		
 	    		pm.deletePersistent(commit);
 		    }
 		    
