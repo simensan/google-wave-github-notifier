@@ -4,34 +4,7 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	<servlet>
-		<servlet-name>Fauxpasnotifier</servlet-name>
-		<servlet-class>com.fauxpas.FauxpasRobotServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-        <servlet-name>Fauxpasnotifier</servlet-name>
-        <url-pattern>/_wave/robot/jsonrpc</url-pattern>
-    </servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Commit</servlet-name>
-		<servlet-class>com.fauxpas.CommitServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-        <servlet-name>Commit</servlet-name>
-        <url-pattern>/commit/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-      <servlet-name>Profile</servlet-name>
-      <servlet-class>com.fauxpas.FauxpasProfileServlet</servlet-class>
-   </servlet>
-   <servlet-mapping>
-      <servlet-name>Profile</servlet-name>
-      <url-pattern>/_wave/robot/profile</url-pattern>
-   </servlet-mapping>
-   
-  
+
   <filter>
     <filter-name>guiceFilter</filter-name>
     <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
@@ -43,6 +16,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   </filter-mapping>
 
   <listener>
-    <listener-class>com.fauxpas.ServletContextListener</listener-class>
+    <listener-class>com.simensan.githubwavenotifier.ServletContextListener</listener-class>
   </listener>
 </web-app>

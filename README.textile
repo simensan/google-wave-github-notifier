@@ -1,1 +1,0 @@
-Add fauxpasnotifier@appspot.com to a wavelet where the github project name is the only text. YOu can edit the first post after its hooked in. The bot will reply with a hook url you add to the project in github under service hooks. 
