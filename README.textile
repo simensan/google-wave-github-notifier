@@ -1,0 +1,9 @@
+h1. Google wave robot for notifying github commits
+
+h2. Intro
+
+Just a weekend fun project I decided to dump here if anyone was planning on doing same. I don't normally code java so it might be fugly to some. 
+Basically you add the robot to your wave where your repo name is the only text, once its added it will reply with a url to add to repo post hook in github.
+When you commit the robot will reply to the wave with the commit message. Can be extended to provide more useful info. 
+
+Taken a lot of concepts and ideas from messy robot / wavelive. 
